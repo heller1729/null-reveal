@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountable Wallet - ZK Proof Demo</title>
+    <meta name="description"
+        content="Zero-Knowledge Proof based wallet accountability verification aligned with BGIN research">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🔐</span>
+                <h1>Accountable Wallet</h1>
+            </div>
+            <p class="subtitle">Zero-Knowledge Proof Demo</p>
+        </header>
+
+        <!-- Info Banner -->
+        <div class="info-banner">
+            <h3>What does this prove?</h3>
+            <p>This demo shows how you can <strong>prove your wallet balance exceeds a threshold</strong> without
+                revealing your actual balance.</p>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Step 1: Create Commitment -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="step-number">1</span>
+                    <h2>Create Balance Commitment</h2>
+                </div>
+                <div class="card-body">
+                    <p class="description">Enter your secret balance. A cryptographic commitment (hash) will be created
+                        that hides your actual balance.</p>
+
+                    <div class="input-group">
+                        <label for="balance">Your Secret Balance</label>
+                        <input type="number" id="balance" placeholder="e.g., 1000" min="0">
+                        <span class="hint">This value stays private</span>
+                    </div>
+
+                    <button id="createCommitment" class="btn btn-primary">
+                        <span class="btn-icon">🔒</span>
+                        Create Commitment
+                    </button>
+
+                    <div id="commitmentResult" class="result-box hidden">
+                        <div class="result-label">Your Balance Commitment (Public)</div>
+                        <code id="commitmentValue"></code>
+                        <p class="result-note">This hash can be shared publicly - it reveals nothing about your balance!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Generate Proof -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="step-number">2</span>
+                    <h2>Generate Accountability Proof</h2>
+                </div>
+                <div class="card-body">
+                    <p class="description">Prove your balance exceeds a threshold without revealing the exact amount.
+                    </p>
+
+                    <div class="input-group">
+                        <label for="threshold">Threshold to Prove</label>
+                        <input type="number" id="threshold" placeholder="e.g., 500" min="0">
+                        <span class="hint">Prove: "My balance ≥ this value"</span>
+                    </div>
+
+                    <button id="generateProof" class="btn btn-primary" disabled>
+                        <span class="btn-icon">⚡</span>
+                        Generate ZK Proof
+                    </button>
+
+                    <div id="proofStatus" class="status-box hidden"></div>
+
+                    <div id="proofResult" class="result-box hidden">
+                        <div class="result-label">Zero-Knowledge Proof</div>
+                        <code id="proofValue"></code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Verify Proof -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="step-number">3</span>
+                    <h2>Verify Proof</h2>
+                </div>
+                <div class="card-body">
+                    <p class="description">Anyone can verify the proof without learning your actual balance.</p>
+
+                    <button id="verifyProof" class="btn btn-secondary" disabled>
+                        <span class="btn-icon">✓</span>
+                        Verify Proof
+                    </button>
+
+                    <div id="verificationResult" class="verification-box hidden">
+                        <div class="verification-icon"></div>
+                        <div class="verification-text"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="tech-stack">Built with Circom + snarkjs · Zero-Knowledge Proofs</p>
+                <p class="tech-stack">Developed by <a href="https://github.com/heller1729" target="_blank">Pratham
+                        Jangra</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingText">Generating proof...</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/snarkjs@0.7.5/build/snarkjs.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

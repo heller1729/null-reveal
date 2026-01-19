@@ -1,0 +1,24 @@
+{
+    "name": "accountable-wallet",
+    "version": "1.0.0",
+    "description": "Zero-Knowledge Proof based Accountable Custody Wallet Demo - Aligned with BGIN Accountable Wallet concept",
+    "main": "index.js",
+    "scripts": {
+        "compile": "circom circuits/balance_threshold.circom --r1cs --wasm --sym -o circuits/build",
+        "setup": "node scripts/setup.js",
+        "serve": "npx http-server web -p 8080 -o"
+    },
+    "keywords": [
+        "zk-snark",
+        "circom",
+        "wallet",
+        "privacy",
+        "bgin"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "circomlib": "^2.0.5",
+        "snarkjs": "^0.7.5"
+    }
+}
